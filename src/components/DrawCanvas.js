@@ -17,8 +17,8 @@ const DrawableCanvas = React.createClass({
   componentDidMount(){
     let canvas = ReactDOM.findDOMNode(this);
 
-    canvas.style.width = '600px';
-    canvas.style.height = '400px';
+    canvas.style.width = this.props.width;
+    canvas.style.height = this.props.height;
     canvas.width  = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
@@ -120,7 +120,7 @@ const DrawableCanvas = React.createClass({
   },
   render() {
     return (
-      <canvas 
+      <canvas
         style = {this.canvasStyle()}
         onMouseDown = {this.handleOnMouseDown}
         onTouchStart = {this.handleOnMouseDown}

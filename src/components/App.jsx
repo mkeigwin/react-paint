@@ -18,7 +18,10 @@ export default class App extends Component {
       clear: false,
       line: 4,
       displayColorPicker: false,
+      width:"600px",
+      height:"400px",
     };
+    console.log(this.state.width)
   }
 
   handleChangeComplete(draw) {
@@ -49,6 +52,22 @@ export default class App extends Component {
     this.setState({
       line: e.target.value,
     });
+  }
+
+  sizeChange(e){
+    if (e.target.value === "B") {
+      this.setState({
+      width: '600px',
+      height: '400px',
+    });
+    }
+    if (e.target.value === "A") {
+      this.setState({
+      width: '1200px',
+      height: '800px',
+    });
+    }
+    console.log(this.state.width)
   }
 
   searchUrl() {
@@ -92,12 +111,19 @@ export default class App extends Component {
     return (
       <div>
         <h1>Canvas Demo</h1>
+          <select onChange={this.sizeChange.bind(this)}>
+            <option value="-1" disabled>--</option>
+            <option value="A">Original</option>
+            <option value="B">Enlarge</option>
+          </select>
         <Form
           updateUrl={(e) => this.updateUrl(e)}
           searchUrl={this.searchUrl.bind(this)}
           holderUrl={this.state.holderUrl}
         />
         <DrawCanvas
+          width={this.state.width}
+          height={this.state.height}
           brushColor={this.state.color}
           lineWidth={this.state.line}
           canvasStyle={{
@@ -125,7 +151,3 @@ export default class App extends Component {
     );
   }
 }
-     //   <SketchPicker
-     //     color={this.state.color}
-      //    onChangeComplete={this.handleChangeComplete.bind(this)}
-     //   />
